@@ -46,6 +46,7 @@ python shell_grenerator.py
 ![Image](images/generate_shell.png)
 
 ## Send request attach shell
+Attach shell get from above step attach to cookie session
 ![Image](images/send_request_attach_shell.png)
 
 ## Exploit success
