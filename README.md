@@ -18,6 +18,10 @@ docker compose exec ktltat_app alembic revision --autogenerate -m "initdb"
 docker compose exec ktltat_app alembic upgrade head
 ```
 
+![Image](images/app_login.png)
+
+![Image](images/app_index.png)
+
 # exploit
 ## Init netcat listener
 
@@ -48,3 +52,7 @@ python shell_grenerator.py
 After send request attach shell, pickle module ran "env" command and sent output to netcat listener
 
 ![Image](images/exploit_success.png)
+
+This is code is exploited
+
+![Image](images/code_is_exploited.png)
