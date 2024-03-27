@@ -38,7 +38,7 @@ note: local ip often is formated: 192.168.x.x
 ```
 ![Image](images/get_your_local_ip.png)
 
-## Gen shell
+## Create shell
 ```
 note: Must change variable local_ip in shell_grenerator.py file before
 python shell_grenerator.py
