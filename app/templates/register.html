@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://kit.fontawesome.com/1362334b71.js"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We"
+      crossorigin="anonymous"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Libre+Franklin:wght@200&display=swap"
+      rel="stylesheet"
+    />
+    <title>Register</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div id="login-form" class="container">
+        <div id="login-form-inside" class="py-5">
+            <header class="text-center text-dark my-2">
+                <h1 class="mb-2">Register</h1>
+            </header>
+            
+            <form class="login-form text-center my-2" action="/register" method="post">
+                <div class="form-group">
+                    <input class="form-control mb-3" type="text" name="username" required placeholder="Username" style="font-size: 1.2rem;" />
+                    <input class="form-control" type="password" name="password" required placeholder="Password" style="font-size: 1.2rem;" />
+                </div>
+                <br />
+                <input type="submit" class="btn btn-outline-dark" value="Register" />
+            </form>
+        </div>
+    </div>
+</body>
+<style>
+
+</style>

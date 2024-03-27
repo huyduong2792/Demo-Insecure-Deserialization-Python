@@ -1,0 +1,94 @@
+<!-- templates/tasks.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Task Manager</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        
+        ul {
+            list-style-type: none;
+            padding: 0;
+            max-width: 400px; /* Added max-width */
+            margin: 0 auto; /* Center the list */
+        }
+        
+        li {
+            background-color: #fff;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        label {
+            font-weight: bold;
+        }
+        
+        input[type="text"] {
+            width: 100%;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        
+        .form-container {
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .task-title {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .task-description {
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <h1>Tasks</h1>
+    <ul class="task-list"> <!-- Added class "task-list" -->
+        {% for task in tasks %}
+            <li>
+                <h2 class="task-title">{{ task.title }}</h2>
+                <p class="task-description">{{ task.description }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+    <div class="form-container">
+        <form action="/tasks/" method="post">
+            <label for="title">Title:</label><br>
+            <input type="text" id="title" name="task_title"><br>
+            <label for="description">Description:</label><br>
+            <input type="text" id="description" name="task_description"><br>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+</body>
+</html>

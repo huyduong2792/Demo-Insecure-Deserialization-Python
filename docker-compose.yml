@@ -1,0 +1,37 @@
+version: "3.7"
+services:
+  postgres:
+    image: postgres:15-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: dev-user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: dev_db
+    ports:
+      - 5432:5432
+    expose:
+      - "5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data:cached
+
+  ktltat_app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: python app/main.py
+    tty: true
+    volumes:
+      - ./app/alembic/versions:/ktltat/app/alembic/versions
+      # - ./.docker/.ipython:/root/.ipython:cached
+    environment:
+      PYTHONPATH: .
+      DATABASE_URL: "postgresql+asyncpg://dev-user:password@postgres:5432/ktltat_db"
+    depends_on:
+      - postgres
+
+    ports:
+      - 9000:9000
+
+volumes:
+  db-data:
+  # test-db-data:
