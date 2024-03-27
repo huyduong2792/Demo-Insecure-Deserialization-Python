@@ -34,7 +34,7 @@ nc -nvlp 1337
 
 ```
 ip a
-note: local ip often id formated: 192.168.x.x
+note: local ip often is formated: 192.168.x.x
 ```
 ![Image](images/get_your_local_ip.png)
 
