@@ -53,6 +53,6 @@ After send request attach shell, pickle module ran "env" command and sent output
 
 ![Image](images/exploit_success.png)
 
-This is code is exploited
+This code in path app/dependency.py is exploited
 
 ![Image](images/code_is_exploited.png)
