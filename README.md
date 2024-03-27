@@ -24,7 +24,7 @@ docker compose exec ktltat_app alembic upgrade head
 ```
 nc -nvlp 1337 
 ```
-![Image](images/init_netcat_listener.jpg)
+![Image](images/init_netcat_listener.png)
 
 ## Get your local ip
 
@@ -32,19 +32,19 @@ nc -nvlp 1337
 ip a
 note: local ip often id formated: 192.168.x.x
 ```
-![Image](images/get_your_local_ip.jpg)
+![Image](images/get_your_local_ip.png)
 
 ## Gen shell
 ```
 note: Must change variable local_ip in shell_grenerator.py file before
 python shell_grenerator.py
 ```
-![Image](images/generate_shell.jpg)
+![Image](images/generate_shell.png)
 
 ## Send request attach shell
-![Image](images/send_request_attach_shell.jpg)
+![Image](images/send_request_attach_shell.png)
 
 ## Exploit success
 After send request attach shell, pickle module ran "env" command and sent output to netcat listener
 
-![Image](images/exploit_success.jpg)
+![Image](images/exploit_success.png)
