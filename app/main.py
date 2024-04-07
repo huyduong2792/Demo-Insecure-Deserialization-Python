@@ -11,7 +11,7 @@ from starlette.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.dependency import get_repository, get_user_authenticated, get_task_from_path, get_db_session
+from app.dependency import ExpiringDict, get_repository, get_user_authenticated, get_task_from_path, get_expiring_dict
 from app.database import sessionmanager
 from app.repositories import TaskRepository, UserRepository
 from app.config import settings
@@ -89,7 +89,8 @@ async def post_login(
     request: Request,
     username: str = Form(...),
     password: str = Form(...),
-    user_repo: UserRepository = Depends(get_repository(UserRepository))):
+    user_repo: UserRepository = Depends(get_repository(UserRepository)),
+    cache: ExpiringDict = Depends(get_expiring_dict)):
 
     user = await user_repo.get_user_by_username(username)
     if user is None:
@@ -97,6 +98,10 @@ async def post_login(
     if user.password_hash == make_password_hash(password):
         session = gen_login_session(username, user.password_hash)
         response = RedirectResponse(f"{settings.base_url}/tasks/", status_code=302)
+        cache.ttl(
+            key=session, 
+            value="1",
+            ttl=settings.cookie_session_timeout)
         response.set_cookie(key="session", value=session, domain=settings.base_domain, max_age=settings.cookie_session_timeout)
         return response
 

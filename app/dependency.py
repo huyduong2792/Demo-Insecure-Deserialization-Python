@@ -4,12 +4,18 @@ from typing import Callable, Type
 from sqlalchemy.ext.asyncio import AsyncSession
 from fastapi.responses import RedirectResponse
 from fastapi import Depends, Cookie, Path, HTTPException, status
+from expiring_dict import ExpiringDict
 
 from app.database import sessionmanager
 from app.repositories import BaseRepository, UserRepository, TaskRepository
 from app.models import User as UserModel, Task
 from app.repositories import EntityDoesNotExist
 from app.ultis import  RequiresLoginException
+
+cache = ExpiringDict()
+
+async def get_expiring_dict():
+    return cache
 
 async def get_db_session():
     async with sessionmanager.session() as session:
@@ -27,9 +33,13 @@ def get_repository(
 
 async def get_user_authenticated(
     cookie_session: str = Cookie(None, alias="session"),
-    user_repo: UserRepository = Depends(get_repository(UserRepository))
+    user_repo: UserRepository = Depends(get_repository(UserRepository)),
+    cache: ExpiringDict = Depends(get_expiring_dict)
 ) -> UserModel:
     if not cookie_session:
+        raise RequiresLoginException
+
+    if not cache.get(cookie_session):
         raise RequiresLoginException
     
     current_user = pickle.loads(base64.b64decode(cookie_session))
