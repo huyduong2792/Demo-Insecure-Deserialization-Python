@@ -96,7 +96,7 @@ async def post_login(
     if user is None:
         raise HTTPException(status_code=404, detail="User not found")
     if user.password_hash == make_password_hash(password):
-        session = gen_login_session(username, user.password_hash)
+        session = gen_login_session(user.id, username, user.password_hash)
         response = RedirectResponse(f"{settings.base_url}/tasks/", status_code=302)
         cache.ttl(
             key=session, 
